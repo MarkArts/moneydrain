@@ -3,9 +3,7 @@ import hre from "hardhat";
 async function main() {
   const lock = await hre.viem.deployContract("Moneydrain", []);
 
-  console.log(
-    `deployed to ${lock.address}`
-  );
+  console.log(`deployed to ${lock.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
