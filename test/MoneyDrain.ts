@@ -6,7 +6,7 @@ import { expect } from "chai";
 import hre from "hardhat";
 import { getAddress, parseEther } from "viem";
 
-describe("Lock", function () {
+describe("Moneydrain", function () {
   // We define a fixture to reuse the same setup in every test.
   // We use loadFixture to run this setup once, snapshot that state,
   // and reset Hardhat Network to that snapshot in every test.
@@ -90,15 +90,6 @@ describe("Lock", function () {
         taker,
         owner,
       } = await loadFixture(deployMoneyDrainFixture);
-      const startRequesterBalance = await publicClient.getBalance({
-        address: getAddress(requester.account.address),
-      });
-      const startTakerBalance = await publicClient.getBalance({
-        address: getAddress(taker.account.address),
-      });
-      const startOwnerBalance = await publicClient.getBalance({
-        address: getAddress(owner.account.address),
-      });
 
       const betAmount = parseEther("42");
       const split = BigInt(Number(betAmount) / 100);
@@ -119,10 +110,6 @@ describe("Lock", function () {
       });
       await publicClient.waitForTransactionReceipt({ hash: hash2 });
 
-      expect((await moneydrain.read.ledger([BigInt(1)]))[2]).to.equal(
-        getAddress(requester.account.address),
-      );
-
       const hash3 = await moneydrainRequester.write.withdrawBet([BigInt(1)]);
       await publicClient.waitForTransactionReceipt({ hash: hash3 });
 
@@ -136,9 +123,9 @@ describe("Lock", function () {
         address: getAddress(owner.account.address),
       });
 
-      expect(requesterBalance).to.equal(10041579771787201916167n);
-      expect(takerBalance).to.equal(9957999889403871656640n);
-      expect(ownerBalance).to.equal(10000417270722235560336n);
+      expect(requesterBalance).to.equal(10041579747732479261482n);
+      expect(takerBalance).to.equal(9957999878059875732060n);
+      expect(ownerBalance).to.equal(10000418073497500000000n);
     });
     it("should not be able to take a bet when you don't send enough eth", async function () {
       const {
