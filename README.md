@@ -1,7 +1,6 @@
 # Moneydrain
 
-This project builds a coinflip Dapp where requesters can place a bet request and a taker can match the bet. a coinflip decides who takes all.
-
+This project is a exploratorie prototype in writing ethereum smart contracts. Do not deploy this on a real chain as it's unsafe, easy exploitable and probaply not legal in the netherlands
 To run the tests use
 
 ```shell
